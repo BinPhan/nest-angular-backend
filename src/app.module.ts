@@ -15,7 +15,7 @@ import { AuthModule } from './auth/auth.module';
       password: 'root',
       database: 'testdb',
       entities: [User],
-      synchronize: true,
+      synchronize: false,
     }),
 
     UsersModule,

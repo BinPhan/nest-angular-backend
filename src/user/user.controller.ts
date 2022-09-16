@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Req } from '@nestjs/common';
+import { Controller, Get, HttpException, HttpStatus, Post, Req } from '@nestjs/common';
 import { Request } from 'express';
 import { User } from './user.entity';
 import { UserService } from './user.service';
@@ -23,12 +23,21 @@ export class UserController {
 
   @Post()
   async addUser(@Req() request: Request) {
-    let user = {
-      username: request.body.userName,
-      name: request.body.name,
-      password: await bcrypt.hash(request.body.password, 10),
+    try {
+      let user = {
+        username: request.body.userName,
+        name: request.body.name,
+        password: await bcrypt.hash(request.body.password, 10),
+      }
+      let res = this.userService.addUser(user)
+      return res;
+
+    } catch (error) {
+      console.log(error.message);
+
+      throw new HttpException(error.message, HttpStatus.INTERNAL_SERVER_ERROR);
+
     }
-    this.userService.addUser(user)
-    return true;
+
   }
 }

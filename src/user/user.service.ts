@@ -27,10 +27,9 @@ export class UserService {
         return this.userRepository.insert(user)
     }
 
-    async login(username: string, password: string): Promise<User | undefined> {
+    async login(username: string): Promise<User | undefined> {
         return this.userRepository.findOneBy({
             username: username,
-            password: password
         })
     }
 }
