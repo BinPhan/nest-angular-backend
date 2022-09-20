@@ -3,6 +3,7 @@ import { Request } from 'express';
 import { User } from './user.entity';
 import { UserService } from './user.service';
 import * as bcrypt from 'bcrypt';
+import { Public } from 'src/config/public.decorator';
 
 @Controller('user')
 export class UserController {
@@ -21,6 +22,7 @@ export class UserController {
     return res
   }
 
+  @Public()
   @Post()
   async addUser(@Req() request: Request) {
     try {
@@ -33,10 +35,7 @@ export class UserController {
       return res;
 
     } catch (error) {
-      console.log(error.message);
-
       throw new HttpException(error.message, HttpStatus.INTERNAL_SERVER_ERROR);
-
     }
 
   }
