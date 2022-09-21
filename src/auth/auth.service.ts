@@ -20,6 +20,10 @@ export class AuthService {
             }
 
             return {
+                id: user.id,
+                name: user.name,
+                username: user.username,
+                roles: user.roles.map(item => { return item.name }),
                 access_token: this.jwtService.sign(payload, {
                     privateKey: process.env.JWT_KEY
                 })

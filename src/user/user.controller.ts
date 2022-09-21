@@ -13,7 +13,6 @@ export class UserController {
     this.userService = userService
   }
 
-
   @Get()
   async findAll(@Req() request: Request): Promise<any> {
 

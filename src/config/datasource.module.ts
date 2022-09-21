@@ -1,5 +1,6 @@
 import { User } from "../user/user.entity"
 import { DataSource } from "typeorm"
+import { Role } from "../roles/entities/role.entity"
 
 const AppDataSource = new DataSource({
     type: 'mysql',
@@ -8,8 +9,8 @@ const AppDataSource = new DataSource({
     username: 'root',
     password: 'root',
     database: 'testdb',
-    entities: [User],
-    migrations: ["migration/*.ts"]
+    entities: [User, Role],
+    migrations: ["migration/*.ts"],
 })
 
 AppDataSource.initialize()

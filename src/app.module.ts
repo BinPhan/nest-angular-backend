@@ -6,6 +6,8 @@ import { UsersModule } from './user/user.module';
 import { AuthModule } from './auth/auth.module';
 import { APP_GUARD } from '@nestjs/core';
 import { JwtAuthGuard } from './auth/jwt-auth.guard';
+import { RolesModule } from './roles/roles.module';
+import { Role } from './roles/entities/role.entity';
 
 @Module({
   imports: [
@@ -16,12 +18,13 @@ import { JwtAuthGuard } from './auth/jwt-auth.guard';
       username: 'root',
       password: 'root',
       database: 'testdb',
-      entities: [User],
+      entities: [User, Role],
       synchronize: false,
     }),
 
     UsersModule,
     AuthModule,
+    RolesModule,
   ],
   controllers: [],
   providers: [
